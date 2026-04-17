@@ -1,0 +1,452 @@
+# ============================================================
+# Design System Prompt — Warm Organic × Subtle Hi-Tech
+# 美容業界コンサルティング向けデザインシステム
+# 「温もりある自然素材の世界観」と「静かな先進性」の融合
+# 特定サイトへの依存ゼロ。あらゆるサービスサイトに流用可能。
+# ============================================================
+
+meta:
+  name: "Warm Organic × Subtle Hi-Tech"
+  version: "1.0.0"
+  description: >
+    白・緑・ベージュ・グレーを基調とした温かみのある配色に、
+    細いライン・幾何学的グリッド・淡いグロー効果で
+    「近未来的な静けさ」をさりげなく加えるデザインシステム。
+    美容・ウェルネス・ライフスタイル業界のコンサル・提案サイトに最適。
+
+# ------------------------------------------------------------
+# 1. CONCEPT & MOOD（コンセプト・雰囲気）
+# ------------------------------------------------------------
+concept:
+  core_metaphor: >
+    「白衣の植物園」—— 清潔感ある白い空間に、
+    緑の植物が静かに息づき、すりガラス越しに柔らかな光が差し込む。
+    そこに精密な計測機器が一台、違和感なく置かれている。
+
+  keywords:
+    warmth:
+      - organic       # 自然由来・有機的
+      - serene        # 静謐・落ち着き
+      - trustworthy   # 信頼感・誠実
+      - nurturing     # 包み込む温もり
+      - refined       # 洗練された上品さ
+    hi_tech:
+      - precise       # 精密・正確
+      - forward       # 先進的・一歩先
+      - intelligent   # 知性的
+      - minimal-edge  # 装飾を削いだ鋭さ
+
+  tension: >
+    「温かさ」と「先進性」は本来相反するが、
+    このシステムではその緊張感を魅力に変える。
+    先進性は主役ではなく、温かみある世界への「隠し味」として機能する。
+    比率は 温かさ70% : 先進性30% を意識する。
+
+  emotional_target:
+    - 「このコンサルタントは信頼できる」という安心感
+    - 「でも、確かに一歩先を行っている」という期待感
+    - 押しつけがましくない知性の存在感
+
+  not:
+    - dark / neon-heavy（暗い背景・強烈なネオン発光は使わない）
+    - clinical / cold-white（病院的な冷たい白も避ける）
+    - overly-decorative（過剰な装飾・ゴージャス感は不要）
+    - aggressive tech（青黒いSaaS Dashboard的な圧迫感は持ち込まない）
+
+# ------------------------------------------------------------
+# 2. COLOR SYSTEM（配色システム）
+# ------------------------------------------------------------
+colors:
+  background:
+    canvas:   "#faf9f6"    # 温かみのある生成り白（全体ベース）
+    surface:  "#f3efe8"    # カード・セクション背景（クリーム）
+    muted:    "#ede8e0"    # 区切り・インセット背景（ライトベージュ）
+    deep:     "#2c2a26"    # フッター・ダークセクション（ウォームブラック）
+
+  accent:
+    primary:    "#4a7c59"  # セージグリーン（主役アクセント・自然・成長）
+    primary_lt: "#7aad89"  # ライトセージ（ホバー・明るい状態）
+    primary_dk: "#2d5a3d"  # フォレストグリーン（強調・見出し）
+    secondary:  "#9b9490"  # ウォームグレー（サブ要素・ラベル）
+    tertiary:   "#c8b89a"  # ウォームゴールド（ポイント・区切り）
+
+  tech_hint:
+    glow_green: "rgba(74,124,89,0.15)"   # 淡いグリーングロー（先進性のヒント）
+    line_soft:  "rgba(74,124,89,0.25)"   # 細いテクノライン
+    grid_faint: "rgba(74,124,89,0.04)"   # 背景グリッドパターン（ほぼ透明）
+
+  text:
+    primary:   "#2c2a26"   # 見出し・重要テキスト（ウォームブラック）
+    secondary: "#5c5752"   # 本文（ウォームダークグレー）
+    muted:     "#9b9490"   # 補足・ラベル（ミドルグレー）
+    inverse:   "#faf9f6"   # ダーク背景上のテキスト（生成り白）
+    accent:    "#4a7c59"   # アクセントカラーのテキスト
+
+  border:
+    default:  "rgba(155,148,144,0.2)"    # 通常ボーダー（薄いウォームグレー）
+    soft:     "rgba(200,184,154,0.3)"    # 柔らかいボーダー（ゴールド系）
+    accent:   "rgba(74,124,89,0.35)"     # アクセントボーダー（グリーン）
+    hover:    "rgba(74,124,89,0.6)"      # ホバー時ボーダー
+
+  usage_rule: >
+    背景はcanvas/surface/mutedの3段階で奥行きを表現する。
+    アクセントカラーはprimary単色を基本とし、
+    tech_hintは「見えるか見えないか」の境界線で使用する。
+    ゴールド（tertiary）は区切りや強調に少量だけ使い
+    高級感のスパイスとして機能させる。
+
+# ------------------------------------------------------------
+# 3. TYPOGRAPHY（タイポグラフィ）
+# ------------------------------------------------------------
+typography:
+  font_roles:
+    display:  "serif or high-contrast sans-serif（見出し・格調と温もりのバランス）"
+    body:     "humanist sans-serif（本文・読みやすさ最優先）"
+    mono:     "monospace light（データ・数値・ラベル・先進性ヒント用）"
+
+  scale:
+    hero:    "clamp(2.8rem, 6vw, 4.5rem)  / font-weight: 700–800 / line-height: 1.15"
+    h2:      "clamp(1.8rem, 3.5vw, 2.5rem) / font-weight: 700    / line-height: 1.2"
+    h3:      "1.2rem                        / font-weight: 600    / line-height: 1.4"
+    body:    "1rem                          / font-weight: 400    / line-height: 1.75"
+    label:   "0.6875rem                    / font-weight: 500    / letter-spacing: 0.2em / mono"
+    caption: "0.8125rem                    / font-weight: 400    / color: muted"
+
+  style_rules:
+    - セリフ体の見出しは「温もり・格調」を強調し、美容業界の文脈に合う
+    - 全大文字ラベル（mono）は「先進性ヒント」として機能する数少ない場所
+    - 行間は広め（1.7–1.8）でゆとりある読書体験を提供する
+    - 見出しの一部ワードだけ primary_dk（フォレストグリーン）にして視線を誘導
+    - 長文テキストは secondary（ウォームダークグレー）で目の疲れを防ぐ
+
+# ------------------------------------------------------------
+# 4. GLASSMORPHISM - WARM EDITION（温かいガラス素材）
+# ------------------------------------------------------------
+glassmorphism:
+  description: >
+    従来の「冷たい青白いガラス」ではなく、
+    温かみのある生成り色・クリーム色をベースにした
+    「曇りガラス越しの朝日」のような素材感。
+
+  properties:
+    background:       "rgba(250,249,246,0.65–0.80)"
+    backdrop_filter:  "blur(16–24px)"
+    border:           "1px solid rgba(200,184,154,0.3)"
+    border_radius:    "16–24px"
+    box_shadow:       "0 4px 24px rgba(44,42,38,0.06), 0 1px 4px rgba(44,42,38,0.04)"
+
+  variants:
+    cream_glass:
+      bg:     "rgba(250,249,246,0.75)"
+      note:   "コンテンツカード・デフォルト。温もりある半透明。"
+    sage_glass:
+      bg:     "rgba(74,124,89,0.06)"
+      border: "rgba(74,124,89,0.2)"
+      note:   "ハイライトカード・選択状態。グリーンのほのかな色づき。"
+    deep_glass:
+      bg:     "rgba(44,42,38,0.7)"
+      border: "rgba(200,184,154,0.15)"
+      note:   "ダークセクション内のカード。"
+
+  rules:
+    - 背景は必ずcanvas/surface/muted + 淡いグリーングロー or 自然光風グラデーション
+    - box_shadowは「青みのある黒」ではなく「ウォームブラック」を使用
+    - ガラスの透過率は高め（0.7以上）で「重さ」を感じさせない
+    - ガラス素材の上に細いgold/greenのボーダーで「輪郭」を与える
+
+# ------------------------------------------------------------
+# 5. SUBTLE HI-TECH ELEMENTS（さりげない先進性の演出）
+# ------------------------------------------------------------
+subtle_hi_tech:
+  description: >
+    「テクノロジー感」を前面に押し出すのではなく、
+    空間のどこかに「精密さ」の痕跡が見え隠れする演出。
+    温かみある空間に置かれた精密な計器のような存在感。
+
+  elements:
+    faint_grid:
+      description: "背景に極薄のグリッドライン。見ようとして初めて気づく程度。"
+      color: "rgba(74,124,89,0.04)"
+      size:  "60–80px"
+      rule:  "ヒーローセクションやフルブリードセクションに限定使用"
+
+    section_label:
+      description: "セクション名を英語大文字monoで表示するメタラベル。"
+      style:  "font-mono / 0.65rem / letter-spacing: 0.3em / color: primary_lt"
+      rule:   "見出しの真上に小さく配置。主張しすぎない。"
+
+    data_accent:
+      description: "数値・統計・実績をmonoフォントで表示。精密感の演出。"
+      style:  "font-mono / large size / color: primary_dk / 細いsans bodyテキストと組み合わせ"
+      example: "「87% → クライアント満足度」のような表現"
+
+    thin_divider:
+      description: "セクション間の区切りに細いグリーンorゴールドライン。"
+      style:  "1px solid / gradient: transparent → accent → transparent / width: 80–120px"
+
+    precision_border:
+      description: "一部カードに細い0.5pxボーダー。精密さのヒント。"
+      style:  "0.5px solid rgba(74,124,89,0.4)"
+
+    subtle_glow:
+      description: "CTAやアイコン周辺に極めて淡いグリーングロー。"
+      style:  "box-shadow: 0 0 20px rgba(74,124,89,0.12)"
+      rule:   "多用禁止。1画面に1–2箇所のみ。"
+
+  rules:
+    - hi-tech要素は「気づかれないかもしれない」くらいの強度が正解
+    - 強くすると「テックっぽすぎる」に転落するため、常に抑制方向に調整
+    - フォントのmono使用がhi-techの最も穏やかな表現手段
+
+# ------------------------------------------------------------
+# 6. BACKGROUND TREATMENT（背景の扱い）
+# ------------------------------------------------------------
+background:
+  base_philosophy: >
+    背景は「何もない白」ではなく「温かみのある余白」として設計する。
+    生成り白・クリーム・薄ベージュを重ねることで
+    奥行きと柔らかさを同時に表現する。
+
+  techniques:
+    warm_gradient:
+      description: "ページ全体にごく薄いウォームグラデーション。"
+      formula:     "linear-gradient(160deg, #faf9f6 0%, #f3efe8 60%, #ede8e0 100%)"
+
+    organic_blur:
+      description: "セクション背景に大きな楕円形ぼかし光源（自然光の差し込み）。"
+      formula:     "radial-gradient(ellipse at 30% 40%, rgba(74,124,89,0.08) 0%, transparent 60%)"
+      size:        "500–800px"
+      placement:   "非対称に配置し「計算された偶然性」を演出"
+
+    faint_grid:
+      description: "背景グリッド（tech_hint参照）"
+      usage:       "ヒーロー・フルブリードセクションのみ"
+
+    texture_hint:
+      description: "極薄のノイズテクスチャ or 点描パターン。紙の質感のヒント。"
+      opacity:     "0.02–0.04"
+      rule:        "使う場合は大きめのセクションに限定。過剰は禁止。"
+
+# ------------------------------------------------------------
+# 7. ANIMATION PRINCIPLES（アニメーション原則）
+# ------------------------------------------------------------
+animation:
+  philosophy: >
+    美容コンサルの動きは「ゆっくり、確実に、品よく」。
+    急速な動き・派手なエフェクトは世界観を壊す。
+    アニメーションは「存在に気づかれない」ほど自然であるべき。
+
+  entrance:
+    fadeInUp:
+      from:     "opacity:0, translateY(20px)"
+      to:       "opacity:1, translateY(0)"
+      duration: "0.9–1.2s"
+      easing:   "cubic-bezier(0.22, 1, 0.36, 1)  // ease-out-expo（柔らかく着地）"
+      stagger:  "0.12–0.18s（科学的ではなく自然な間隔）"
+
+    fadeIn:
+      description: "動きを最小化したい場所。不透明度のみ変化。"
+      duration:    "0.8s / ease-out"
+
+  ambient:
+    soft_float:
+      description: "装飾要素がゆっくり呼吸するように浮遊。"
+      range:       "±6–8px（控えめに）"
+      duration:    "5–7s / ease-in-out / infinite"
+      rule:        "使いすぎると「そわそわ」した印象になるため1–2要素のみ"
+
+  interaction:
+    hover_card:
+      transform:   "translateY(-3–4px)"
+      box_shadow:  "0 8px 32px rgba(44,42,38,0.10)"
+      border:      "rgba(74,124,89,0.5)"
+      transition:  "all 0.4s cubic-bezier(0.22,1,0.36,1)"
+      note:        "大きく動かさない。上品な「浮き上がり」感。"
+
+    hover_button:
+      bg:          "primary_dk（少し濃くなる）"
+      transform:   "translateY(-1px)"
+      box_shadow:  "0 4px 16px rgba(74,124,89,0.2)"
+      transition:  "0.3s ease"
+
+    hover_link:
+      color:       "primary（#4a7c59）"
+      border_bottom: "1px solid rgba(74,124,89,0.4)"
+      transition:  "0.2s ease"
+
+  rules:
+    - easing は常に「ease-out系」（快活な開始・柔らかい終わり）
+    - bounceやelastic系のeasingは品格を損なうため禁止
+    - duration は最短 0.25s、最長 1.5s（演出系）を超えない
+    - prefers-reduced-motion を必ず実装する
+
+# ------------------------------------------------------------
+# 8. COMPONENT PATTERNS（コンポーネントパターン）
+# ------------------------------------------------------------
+components:
+  card:
+    base:          "cream_glass + 柔らかいshadow + hover_card animation"
+    border_radius: "20–24px"
+    padding:       "28–36px"
+    inner_accent:  "カード上辺に3px幅の primary グリーンライン（オプション）"
+    note:          "カードは「紙のような軽さ」を目指す"
+
+  badge:
+    bg:     "rgba(74,124,89,0.10)"
+    border: "rgba(74,124,89,0.25)"
+    color:  "#4a7c59"
+    font:   "mono / 11–12px / letter-spacing: 0.05em"
+    radius: "99px（ピル型）"
+
+  badge_neutral:
+    bg:     "rgba(155,148,144,0.12)"
+    border: "rgba(155,148,144,0.25)"
+    color:  "#5c5752"
+    note:   "カテゴリ・補足情報に使用"
+
+  button_primary:
+    bg:          "#4a7c59"
+    color:       "#faf9f6"
+    border:      "none"
+    radius:      "8–10px"
+    padding:     "14px 28px"
+    hover_bg:    "#2d5a3d"
+    note:        "塗りつぶし型。温かみある緑が信頼感を演出。"
+
+  button_ghost:
+    bg:          "transparent"
+    color:       "#4a7c59"
+    border:      "1.5px solid rgba(74,124,89,0.5)"
+    hover_bg:    "rgba(74,124,89,0.06)"
+    note:        "セカンダリアクション。軽やかさを維持。"
+
+  section_label:
+    format:  "英語大文字 / mono / letter-spacing: 0.25em / color: primary_lt"
+    size:    "0.65rem"
+    note:    "hi-techヒントとして機能。存在感は薄く。"
+
+  divider:
+    style:   "1px solid / gradient: transparent → tertiary → transparent"
+    width:   "80px / centered"
+    margin:  "12px auto 32px"
+
+  stat_item:
+    number:  "mono / 2.5–3.5rem / font-weight:700 / color: primary_dk"
+    label:   "sans / 0.875rem / color: muted"
+    note:    "数値で信頼・実績を表現するコンポーネント"
+
+# ------------------------------------------------------------
+# 9. LAYOUT PHILOSOPHY（レイアウト哲学）
+# ------------------------------------------------------------
+layout:
+  grid:
+    philosophy: >
+      整然とした美しさの中に「意図的な非対称」を混ぜる。
+      全て同じサイズのグリッドは単調に見える。
+      大小を組み合わせることで、視線に自然なリズムが生まれる。
+
+    primary_pattern: "2カラム非対称（6:4 or 7:3）をセクションごとに左右交互"
+    bento_grid:      "Works/事例セクションでのみBento（大中小カード混在）を使用"
+    rules:
+      - モバイルは全て1カラム
+      - gap は 20–28px（カード間の「余白」が品格を作る）
+      - セクションの最大幅は 1100–1200px
+
+  spacing:
+    section_vertical: "100–140px（ゆったりした呼吸感）"
+    content_padding:  "32–48px"
+    tight_gap:        "8–12px（テキストグループ内）"
+    loose_gap:        "24–32px（コンポーネント間）"
+
+  visual_hierarchy:
+    - ウォームグラデーション背景（最奥）
+    - 有機的ブラーグロー（自然光演出）
+    - 背景グリッド（tech hint、ほぼ不可視）
+    - surface/mutedカラーのセクション背景
+    - cream_glassカード
+    - テキスト・アイコン（前景）
+    - CTAボタン・subtle glow（最前面）
+
+# ------------------------------------------------------------
+# 10. PHOTOGRAPHY & IMAGERY（写真・画像の扱い）
+# ------------------------------------------------------------
+imagery:
+  style: >
+    自然光・柔らかいフォーカス・ナチュラルカラーの写真を優先。
+    高彩度・過剰加工・コールドトーンは使わない。
+
+  color_treatment:
+    - 写真に "warm overlay: rgba(250,249,246,0.08)" を重ねて背景色と馴染ませる
+    - border-radius: 16–20px で角を丸め「柔らかさ」を統一
+
+  icon_style:
+    - 線描き（outline）スタイル推奨
+    - stroke-width: 1.5px
+    - color: primary or secondary
+    - 塗りつぶしアイコンを使う場合は輪郭を薄くして重くならないようにする
+
+# ------------------------------------------------------------
+# 11. IMPLEMENTATION HINTS（実装ヒント）
+# ------------------------------------------------------------
+implementation:
+  stack_recommendations:
+    - "Next.js + TailwindCSS（CSS変数でトークン一元管理）"
+    - "Framer Motion（entrance animation を柔らかいeasingで）"
+    - "Google Fonts: Cormorant Garamond（display）+ Inter or DM Sans（body）"
+
+  css_tokens: |
+    :root {
+      /* Background */
+      --bg-canvas:   #faf9f6;
+      --bg-surface:  #f3efe8;
+      --bg-muted:    #ede8e0;
+      --bg-deep:     #2c2a26;
+
+      /* Accent */
+      --accent-primary:    #4a7c59;
+      --accent-primary-lt: #7aad89;
+      --accent-primary-dk: #2d5a3d;
+      --accent-secondary:  #9b9490;
+      --accent-gold:       #c8b89a;
+
+      /* Text */
+      --text-primary:   #2c2a26;
+      --text-secondary: #5c5752;
+      --text-muted:     #9b9490;
+      --text-inverse:   #faf9f6;
+
+      /* Glass */
+      --glass-bg:     rgba(250,249,246,0.75);
+      --glass-border: rgba(200,184,154,0.30);
+
+      /* Tech hint */
+      --tech-glow:  rgba(74,124,89,0.12);
+      --tech-line:  rgba(74,124,89,0.25);
+      --tech-grid:  rgba(74,124,89,0.04);
+    }
+
+  font_pairing_examples:
+    option_a:
+      display: "Cormorant Garamond（セリフ・格調）"
+      body:    "DM Sans（読みやすいgeometric sans）"
+      mono:    "JetBrains Mono Light（数値・ラベル）"
+    option_b:
+      display: "Playfair Display（エレガントなセリフ）"
+      body:    "Inter（ニュートラルで可読性高）"
+      mono:    "Fira Code（モノスペース）"
+    option_c:
+      display: "Sora or Plus Jakarta Sans（モダンなsans）"
+      body:    "Noto Sans JP（日本語対応）"
+      mono:    "Source Code Pro"
+
+  accessibility:
+    - "text_primary (#2c2a26) on canvas (#faf9f6): コントラスト比 約14:1 ✓"
+    - "accent_primary (#4a7c59) on canvas: 約5.2:1 ✓（WCAG AA）"
+    - "prefers-color-scheme: dark への対応は任意だが、深みのある茶系ダークモードが合う"
+    - "@media (prefers-reduced-motion: reduce) でアニメーション無効化"
+
+  dark_mode_suggestion:
+    bg_base:  "#1a1c18"    # ウォームなダークグリーン
+    surface:  "#232620"
+    text:     "#e8e4dc"    # 生成り系ホワイト
+    note:     "必要な場合のみ実装。ブランドコンセプト次第。"

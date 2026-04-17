@@ -1,26 +1,277 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Warm Organic × Subtle Hi-Tech — Design Tokens
+   「白衣の植物園」コンセプト
+   ============================================================ */
+
+@theme {
+  /* --- Backgrounds --- */
+  --color-canvas:   #faf9f6;
+  --color-surface:  #f3efe8;
+  --color-muted:    #ede8e0;
+  --color-deep:     #2c2a26;
+
+  /* --- Brand --- */
+  --color-sage:     #4a7c59;
+  --color-sage-lt:  #7aad89;
+  --color-forest:   #2d5a3d;
+  --color-stone:    #9b9490;
+  --color-gold:     #c8b89a;
+
+  /* --- Text --- */
+  --color-ink:      #2c2a26;
+  --color-ink-mid:  #5c5752;
+  --color-ink-soft: #9b9490;
+  --color-ink-inv:  #faf9f6;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #faf9f6;
+  color: #2c2a26;
+  font-family: var(--font-body, Inter, system-ui, sans-serif);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display, "Cormorant Garamond", Georgia, serif);
+  line-height: 1.15;
+  color: #2c2a26;
+}
+
+code, .font-mono {
+  font-family: var(--font-code, "JetBrains Mono", "Fira Code", monospace);
+}
+
+/* ============================================================
+   Glassmorphism — Warm Edition
+   ============================================================ */
+.glass-warm {
+  background: rgba(250, 249, 246, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 184, 154, 0.32);
+  box-shadow:
+    0 4px 24px rgba(44, 42, 38, 0.07),
+    0 1px 4px  rgba(44, 42, 38, 0.04);
+}
+
+.glass-sage {
+  background: rgba(74, 124, 89, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(74, 124, 89, 0.22);
+  box-shadow: 0 4px 20px rgba(74, 124, 89, 0.08);
+}
+
+.glass-deep {
+  background: rgba(44, 42, 38, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 184, 154, 0.14);
+}
+
+/* ============================================================
+   Subtle Hi-Tech Elements
+   ============================================================ */
+
+/* 極薄グリッド背景 — 見ようとして初めて気づく程度 */
+.grid-faint {
+  background-image:
+    linear-gradient(rgba(74, 124, 89, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 124, 89, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+/* 有機的ブラーグロー — 自然光の差し込み演出 */
+.organic-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+/* セクションラベル — hi-techヒント */
+.section-label {
+  font-family: var(--font-code, monospace);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #7aad89;
+}
+
+/* 精密ボーダー */
+.precision-border {
+  border: 0.5px solid rgba(74, 124, 89, 0.38);
+}
+
+/* Subtle glow — 1画面に1-2箇所のみ */
+.subtle-glow {
+  box-shadow: 0 0 24px rgba(74, 124, 89, 0.14);
+}
+
+/* 区切りライン */
+.divider-gold {
+  width: 80px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, #c8b89a, transparent);
+}
+.divider-sage {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #4a7c59, transparent);
+}
+
+/* カード上部のアクセントバー */
+.card-accent-top::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #4a7c59, #7aad89);
+  border-radius: 3px 3px 0 0;
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   Animations — ease-out-expo 系のみ使用
+   ============================================================ */
+
+/* 「柔らかく着地する」ease */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes scanLine {
+  0%   { top: -2%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 102%; opacity: 0; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.animate-fade-up    { animation: fadeInUp    1.0s var(--ease-out-expo) both; }
+.animate-fade-left  { animation: fadeInLeft  1.0s var(--ease-out-expo) both; }
+.animate-fade-right { animation: fadeInRight 1.0s var(--ease-out-expo) both; }
+.animate-fade-in    { animation: fadeIn      0.8s var(--ease-out-quart) both; }
+.animate-float      { animation: softFloat   6s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 0.10s; }
+.delay-200 { animation-delay: 0.20s; }
+.delay-300 { animation-delay: 0.32s; }
+.delay-400 { animation-delay: 0.44s; }
+.delay-500 { animation-delay: 0.56s; }
+.delay-600 { animation-delay: 0.68s; }
+
+/* prefers-reduced-motion 対応 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Interaction — hover
+   ============================================================ */
+.card-hover {
+  transition: transform 0.4s var(--ease-out-expo),
+              box-shadow 0.4s var(--ease-out-expo),
+              border-color 0.4s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(44, 42, 38, 0.11),
+    0 4px 12px  rgba(44, 42, 38, 0.06);
+  border-color: rgba(74, 124, 89, 0.45) !important;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #4a7c59;
+  color: #faf9f6;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.3s ease,
+              transform 0.3s var(--ease-out-expo),
+              box-shadow 0.3s ease;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #2d5a3d;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(74, 124, 89, 0.25);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #4a7c59;
+  border: 1.5px solid rgba(74, 124, 89, 0.45);
+  border-radius: 8px;
+  padding: 13px 28px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.3s ease,
+              border-color 0.3s ease,
+              transform 0.3s var(--ease-out-expo);
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  background: rgba(74, 124, 89, 0.07);
+  border-color: rgba(74, 124, 89, 0.7);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f3efe8; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#7aad89, #c8b89a);
+  border-radius: 3px;
 }
