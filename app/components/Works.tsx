@@ -1,7 +1,8 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import { useInView } from "../hooks/useInView";
+
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const works = [
   { id: 1,  image: "/works/image2.webp",  title: "AIコードレビュー",         desc: "Claude CodeでリアルタイムコードレビューをVSCode上で実施",             category: "AI",  size: "large",  result: "品質 +40%"   },
@@ -45,13 +46,13 @@ function WorkCard({ w, delay, inView }: {
       style={{ transitionDelay: delay, height }}
     >
       {/* 実績画像 */}
-      <Image
-        src={w.image}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`${BASE}${w.image}`}
         alt={w.title}
-        fill
-        style={{ objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.19,1,0.22,1)" }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.19,1,0.22,1)" }}
         className="group-hover:scale-105"
-        unoptimized
       />
 
       {/* 結果バッジ（常時表示） */}
