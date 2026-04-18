@@ -1,5 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+
+/* Hero はページ最上部 → JS不要の純粋CSS animationで実装 */
+
+const EXP = "cubic-bezier(0.19,1,0.22,1)";
 
 const stats = [
   { value: "50+",  label: "プロジェクト実績" },
@@ -14,11 +17,14 @@ const services = [
   { icon: "⚡", title: "スピード実装",  desc: "提案から3週間で本番稼働" },
 ];
 
-export default function Hero() {
-  // Hero は常にビューポート最上部 → マウント後即アニメーション
-  const [inView, setInView] = useState(false);
-  useEffect(() => { const id = requestAnimationFrame(() => setInView(true)); return () => cancelAnimationFrame(id); }, []);
+function fadeUp(delay: string) {
+  return { animation: `fadeInUp 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+}
+function fadeRight(delay: string) {
+  return { animation: `fadeInRight 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+}
 
+export default function Hero() {
   return (
     <section
       id="hero"
@@ -34,52 +40,42 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 w-full pt-28 pb-20">
         <div className="grid md:grid-cols-12 gap-10 items-center">
 
-          {/* 左：キャッチコピー */}
+          {/* 左：テキスト */}
           <div className="md:col-span-7 space-y-7">
-            <div className={`transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}
-              style={{ transitionDelay:"0.1s" }}>
+            <div style={fadeUp("0.1s")}>
               <span className="section-label">BEAUTY × AI CONSULTING</span>
             </div>
 
-            <h1
-              className={`transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-8"}`}
-              style={{
-                fontFamily:"var(--font-display,Georgia,serif)",
-                fontSize:"clamp(2.8rem,5.5vw,4.4rem)",
-                fontWeight:700, lineHeight:1.1, color:"#2c2a26",
-                transitionDelay:"0.2s",
-              }}
-            >
+            <h1 style={{
+              ...fadeUp("0.22s"),
+              fontFamily:"var(--font-display,Georgia,serif)",
+              fontSize:"clamp(2.8rem,5.5vw,4.4rem)",
+              fontWeight:700, lineHeight:1.1, color:"#2c2a26",
+            }}>
               美容の未来を、<br />
               <span style={{ color:"#4a7c59" }}>戦略と技術</span>で<br />
               設計する。
             </h1>
 
-            <p
-              className={`transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}
-              style={{ fontSize:"1rem",color:"#5c5752",lineHeight:1.85,maxWidth:"460px",transitionDelay:"0.32s" }}
-            >
+            <p style={{
+              ...fadeUp("0.34s"),
+              fontSize:"1rem",color:"#5c5752",lineHeight:1.85,maxWidth:"460px",
+            }}>
               AI自動化・デジタル変革を通じて、美容サロン・クリニック・
               ブランドが抱える課題を解決するコンサルティングサービス。
             </p>
 
-            <div
-              className={`flex flex-wrap gap-4 transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}
-              style={{ transitionDelay:"0.42s" }}
-            >
+            <div style={{ ...fadeUp("0.44s"), display:"flex",flexWrap:"wrap",gap:"16px" }}>
               <a href="#works"   className="btn-primary">事例を見る <span>→</span></a>
               <a href="#contact" className="btn-ghost">無料相談する</a>
             </div>
 
-            {/* 区切り */}
-            <div className={`transition-all duration-700 ${inView?"opacity-100":"opacity-0"}`}
-              style={{ width:80,height:1,background:"linear-gradient(90deg,#c8b89a,transparent)",transitionDelay:"0.52s" }} />
+            <div style={{
+              ...fadeUp("0.54s"),
+              width:80,height:1,background:"linear-gradient(90deg,#c8b89a,transparent)",
+            }} />
 
-            {/* Stats */}
-            <div
-              className={`flex flex-wrap gap-10 transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-4"}`}
-              style={{ transitionDelay:"0.62s" }}
-            >
+            <div style={{ ...fadeUp("0.64s"), display:"flex",flexWrap:"wrap",gap:"40px" }}>
               {stats.map((s) => (
                 <div key={s.label}>
                   <div style={{ fontFamily:"var(--font-code,monospace)",fontSize:"2.2rem",
@@ -91,20 +87,18 @@ export default function Hero() {
           </div>
 
           {/* 右：サービスカード */}
-          <div
-            className={`md:col-span-5 transition-all duration-700 ${inView?"opacity-100 translate-x-0":"opacity-0 translate-x-8"}`}
-            style={{ transitionDelay:"0.28s" }}
-          >
-            <div className="glass-warm rounded-3xl p-7 space-y-1 animate-float" style={{ borderRadius:"26px" }}>
-              <div className="flex items-center gap-3 mb-5">
+          <div className="md:col-span-5" style={fadeRight("0.3s")}>
+            <div className="glass-warm animate-float"
+              style={{ borderRadius:"26px",padding:"28px" }}>
+              <div style={{ display:"flex",alignItems:"center",gap:"12px",marginBottom:"20px" }}>
                 <div style={{ width:8,height:8,borderRadius:"50%",background:"#4a7c59",
                   boxShadow:"0 0 8px rgba(74,124,89,0.55)" }} />
                 <span className="section-label">SERVICE OVERVIEW</span>
               </div>
 
               {services.map((item) => (
-                <div key={item.title} className="flex items-start gap-4 py-3"
-                  style={{ borderBottom:"1px solid rgba(200,184,154,0.25)" }}>
+                <div key={item.title} style={{ display:"flex",alignItems:"flex-start",gap:"14px",
+                  padding:"12px 0",borderBottom:"1px solid rgba(200,184,154,0.25)" }}>
                   <span style={{ fontSize:"1.35rem",flexShrink:0,marginTop:"2px" }}>{item.icon}</span>
                   <div>
                     <div style={{ fontWeight:600,fontSize:"0.88rem",color:"#2c2a26",marginBottom:"2px" }}>{item.title}</div>
@@ -113,9 +107,10 @@ export default function Hero() {
                 </div>
               ))}
 
-              <div className="subtle-glow" style={{ marginTop:"12px",padding:"9px 14px",borderRadius:"10px",
-                background:"rgba(74,124,89,0.07)",border:"0.5px solid rgba(74,124,89,0.3)",
-                display:"flex",alignItems:"center",gap:"8px" }}>
+              <div className="subtle-glow" style={{ marginTop:"14px",padding:"9px 14px",
+                borderRadius:"10px",background:"rgba(74,124,89,0.07)",
+                border:"0.5px solid rgba(74,124,89,0.3)",
+                display:"flex",alignItems:"center",gap:"10px" }}>
                 <span style={{ width:7,height:7,borderRadius:"50%",background:"#4a7c59",flexShrink:0,
                   boxShadow:"0 0 6px rgba(74,124,89,0.6)" }} />
                 <span style={{ fontFamily:"var(--font-code,monospace)",fontSize:"0.62rem",
@@ -128,8 +123,9 @@ export default function Hero() {
       </div>
 
       {/* スクロールヒント */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        style={{ opacity:0.38 }}>
+      <div style={{ position:"absolute",bottom:"32px",left:"50%",transform:"translateX(-50%)",
+        display:"flex",flexDirection:"column",alignItems:"center",gap:"8px",opacity:0.38,
+        ...fadeUp("1.0s") }}>
         <span className="section-label">SCROLL</span>
         <div className="animate-float" style={{ width:1,height:38,
           background:"linear-gradient(to bottom,#4a7c59,transparent)" }} />
