@@ -1,5 +1,5 @@
 "use client";
-import { useInView } from "../hooks/useInView";
+import { useEffect, useState } from "react";
 
 const stats = [
   { value: "50+",  label: "プロジェクト実績" },
@@ -15,12 +15,13 @@ const services = [
 ];
 
 export default function Hero() {
-  const { ref, inView } = useInView<HTMLElement>(0.05);
+  // Hero は常にビューポート最上部 → マウント後即アニメーション
+  const [inView, setInView] = useState(false);
+  useEffect(() => { const id = requestAnimationFrame(() => setInView(true)); return () => cancelAnimationFrame(id); }, []);
 
   return (
     <section
       id="hero"
-      ref={ref}
       className="relative min-h-screen flex items-center overflow-hidden grid-faint"
       style={{ background: "linear-gradient(160deg,#faf9f6 0%,#f3efe8 55%,#ede8e0 100%)" }}
     >
