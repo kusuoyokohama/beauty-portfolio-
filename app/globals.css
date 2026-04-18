@@ -133,6 +133,16 @@ code, .font-mono {
   background: linear-gradient(90deg, transparent, #4a7c59, transparent);
 }
 
+/* 画像カードのホバーオーバーレイ用グラデーション */
+.glass-photo {
+  background: linear-gradient(
+    to top,
+    rgba(44, 42, 38, 0.88) 0%,
+    rgba(44, 42, 38, 0.5) 45%,
+    transparent 100%
+  );
+}
+
 /* カード上部のアクセントバー */
 .card-accent-top::before {
   content: "";

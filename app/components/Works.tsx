@@ -1,128 +1,138 @@
 "use client";
+import Image from "next/image";
+import { useState } from "react";
 import { useInView } from "../hooks/useInView";
 
-const projects = [
-  {
-    id: 1,
-    title: "SNS 自動生成システム",
-    description:
-      "Claude API を活用し、美容サロン向けの Instagram・X 投稿を自動生成。施術写真からAIがキャプション・ハッシュタグを自動作成し、運用コストを週4時間 → 30分に削減した。",
-    cover: "🌸",
-    accentColor: "#4a7c59",
-    accentBg: "rgba(74,124,89,0.07)",
-    tech: ["Claude API", "Next.js", "TypeScript", "Anthropic"],
-    result: "運用時間 −87%",
-    size: "large",
-  },
-  {
-    id: 2,
-    title: "顧客管理 AI Dashboard",
-    description:
-      "来店履歴・施術データをAIが分析しリピート来店予測・失客アラートを自動化。美容クリニック向けダッシュボード。",
-    cover: "📈",
-    accentColor: "#c8b89a",
-    accentBg: "rgba(200,184,154,0.12)",
-    tech: ["React", "TailwindCSS", "Claude API", "Vercel"],
-    result: "リピート率 +23%",
-    size: "medium",
-  },
-  {
-    id: 3,
-    title: "Puyo Game プロトタイプ",
-    description:
-      "Next.js × React でゲームロジックを実証したインタラクティブプロトタイプ。AI提案UIの技術検証として制作。",
-    cover: "🎮",
-    accentColor: "#7aad89",
-    accentBg: "rgba(122,173,137,0.09)",
-    tech: ["Next.js", "React", "TypeScript", "CSS Animation"],
-    result: "技術検証完了",
-    size: "medium",
-  },
+const works = [
+  { id: 1,  image: "/works/image2.webp",  title: "AIコードレビュー",         desc: "Claude CodeでリアルタイムコードレビューをVSCode上で実施",             category: "AI",  size: "large",  result: "品質 +40%"   },
+  { id: 2,  image: "/works/image3.webp",  title: "マルチパネルAI開発",       desc: "Claude Codeのcode-reviewer＆テスト自動生成をVSCodeで活用",           category: "AI",  size: "large",  result: "工数 −60%"   },
+  { id: 3,  image: "/works/image10.webp", title: "マルチAIパイプライン",      desc: "analyzer→builder→reviewerの3SubAgent自律パイプライン構築",           category: "AI",  size: "large",  result: "完全自律化"   },
+  { id: 4,  image: "/works/image11.webp", title: "build-and-reviewコマンド", desc: "分析→実装→検証の完全自律ワークフローをコマンド1発で実行",             category: "AI",  size: "large",  result: "3ステップ統合" },
+  { id: 5,  image: "/works/image7.webp",  title: "ChatGPT会話ログ分析",      desc: "ChatGPT会話ログをClaudeで解析・アカウント統計を自動算出",             category: "AI",  size: "large",  result: "統計自動化"   },
+  { id: 6,  image: "/works/image4.webp",  title: "カスタムスキル構築",        desc: "Claude CodeにカスタムSkillを実装しスキル自動移動を実現",               category: "AI",  size: "medium", result: "自動移動"     },
+  { id: 7,  image: "/works/image5.webp",  title: "文字数カウントAI",          desc: "LLMトークン最適化のための文字数カウント専門エージェント",               category: "AI",  size: "medium", result: "最適化"       },
+  { id: 8,  image: "/works/image8.webp",  title: "ファイル要約スキル",         desc: "file-summarizerスキルでMarkdown構造化要約を自動出力",                 category: "AI",  size: "medium", result: "自動要約"     },
+  { id: 9,  image: "/works/image9.webp",  title: "SEO最適化要約AI",           desc: "file-summarizerにSEOキーワード最適化ステップを追加実装",               category: "AI",  size: "medium", result: "SEO強化"      },
+  { id: 10, image: "/works/image12.webp", title: "builder-agent実装",         desc: "TypeScript静的検証ゼロエラー確認までAIが自律コーディング",             category: "AI",  size: "medium", result: "0エラー"      },
+  { id: 11, image: "/works/image16.webp", title: "Googleスプレッド連携",      desc: "ClaudeがGoogleスプレッドシートを直接操作・データ入力を自動化",         category: "AI",  size: "medium", result: "入力自動化"   },
+  { id: 12, image: "/works/image18.webp", title: "Claude in Chrome連携",      desc: "VSCodeターミナルとChromeをClaude Codeブリッジで統合制御",             category: "AI",  size: "medium", result: "統合制御"     },
+  { id: 13, image: "/works/image14.webp", title: "Webスクレイピング自動化",   desc: "ClaudeがYahooニュース等を横断閲覧・情報収集を自動化",                 category: "Web", size: "medium", result: "収集自動化"   },
+  { id: 14, image: "/works/image17.webp", title: "Webニュース自動収集",        desc: "Claude HaikuがYahooニュースをブラウザ操作でリアルタイム収集",         category: "Web", size: "medium", result: "リアルタイム"  },
+  { id: 15, image: "/works/image19.webp", title: "多ソースニュース比較",       desc: "Claude Haikuが複数ニュースサイトを横断・トピック比較を自動生成",       category: "Web", size: "medium", result: "横断比較"     },
+  { id: 16, image: "/works/image.webp",   title: "ぷよゲームGitHub公開",      desc: "Next.js製ぷよゲームをVercelにデプロイ・GitHub公開",                   category: "Web", size: "medium", result: "デプロイ完了"  },
+  { id: 17, image: "/works/image15.webp", title: "Seleniumログイン自動化",    desc: "Selenium経由でログイン→安全区域アクセスを自動実行",                   category: "Web", size: "small",  result: "ログイン自動化" },
+  { id: 18, image: "/works/image6.webp",  title: "会議テンプレ自動生成",      desc: "Claude Code Skillで会議議事録Markdownを即時生成",                     category: "AI",  size: "small",  result: "即時生成"     },
+  { id: 19, image: "/works/image13.webp", title: "reviewer-agent検証",         desc: "3SubAgentパイプラインの分析→改善→検証レポートをモバイル表示",         category: "AI",  size: "small",  result: "検証完了"     },
 ];
 
-type Project = (typeof projects)[number];
+const FILTERS = ["All", "AI", "Web"] as const;
 
-function Card({ p, delay, inView }: { p: Project; delay: string; inView: boolean }) {
-  const large = p.size === "large";
+function WorkCard({ w, delay, inView }: {
+  w: typeof works[number];
+  delay: string;
+  inView: boolean;
+}) {
+  const isLarge = w.size === "large";
+  const isMedium = w.size === "medium";
+
+  const height = isLarge ? 420 : isMedium ? 220 : 180;
+
   return (
     <div
-      className={`glass-warm rounded-2xl overflow-hidden card-hover flex flex-col transition-all duration-700
-        ${large ? "md:col-span-2 md:row-span-2" : ""}
+      className={`relative rounded-2xl overflow-hidden group transition-all duration-700
+        ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
         ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      style={{ borderRadius:"20px", transitionDelay: delay }}
+      style={{ transitionDelay: delay, height }}
     >
-      {/* トップアクセントバー */}
-      <div style={{ height:3, background:`linear-gradient(90deg,${p.accentColor},transparent)` }} />
+      {/* 実績画像 */}
+      <Image
+        src={w.image}
+        alt={w.title}
+        fill
+        style={{ objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.19,1,0.22,1)" }}
+        className="group-hover:scale-105"
+        unoptimized
+      />
 
-      {/* カバー */}
-      <div className={`relative flex items-center justify-center overflow-hidden ${large ? "h-52" : "h-36"}`}
-        style={{ background:`linear-gradient(135deg,${p.accentBg},rgba(250,249,246,0.4))` }}>
-        <div className="absolute inset-0 grid-faint opacity-50" />
-        <span className="relative z-10" style={{ fontSize: large ? "4.5rem" : "3rem",
-          filter:"drop-shadow(0 2px 8px rgba(44,42,38,0.1))" }}>{p.cover}</span>
-        {/* 結果バッジ */}
-        <div className="absolute top-3 right-3" style={{ background:"rgba(250,249,246,0.92)",
-          border:`1px solid ${p.accentColor}33`,borderRadius:6,padding:"3px 10px" }}>
-          <span style={{ fontFamily:"var(--font-code,monospace)",fontSize:"0.62rem",
-            color:p.accentColor,letterSpacing:"0.05em" }}>{p.result}</span>
-        </div>
+      {/* 結果バッジ（常時表示） */}
+      <div className="absolute top-3 right-3 z-20"
+        style={{ background: "rgba(250,249,246,0.92)", border: "1px solid rgba(74,124,89,0.35)",
+          borderRadius: 6, padding: "3px 10px" }}>
+        <span style={{ fontFamily: "var(--font-code,monospace)", fontSize: "0.6rem",
+          color: "#4a7c59", letterSpacing: "0.06em" }}>{w.result}</span>
       </div>
 
-      {/* 内容 */}
-      <div className="p-6 flex flex-col flex-1">
-        <h3 style={{ fontFamily:"var(--font-display,Georgia,serif)",
-          fontSize: large ? "1.4rem" : "1.1rem",fontWeight:600,color:"#2c2a26",marginBottom:"10px" }}>
-          {p.title}
-        </h3>
-        <p style={{ fontSize:"0.82rem",color:"#5c5752",lineHeight:1.78,marginBottom:"16px",flexGrow:1 }}>
-          {p.description}
-        </p>
-        {/* バッジ */}
-        <div className="flex flex-wrap gap-2 mb-5">
-          {p.tech.map((t) => (
-            <span key={t} className="font-mono" style={{ padding:"3px 10px",borderRadius:99,
-              fontSize:"0.62rem",background:p.accentBg,color:p.accentColor,
-              border:`1px solid ${p.accentColor}30`,letterSpacing:"0.03em" }}>{t}</span>
-          ))}
-        </div>
-        {/* リンク */}
-        <div className="flex gap-3">
-          <a href="#" style={{ padding:"6px 14px",fontSize:"0.72rem",borderRadius:6,
-            background:"rgba(155,148,144,0.1)",color:"#9b9490",
-            border:"1px solid rgba(155,148,144,0.2)",textDecoration:"none",
-            fontFamily:"var(--font-code,monospace)",letterSpacing:"0.05em" }}>GitHub</a>
-          <a href="#" style={{ padding:"6px 14px",fontSize:"0.72rem",borderRadius:6,
-            background:p.accentBg,color:p.accentColor,
-            border:`1px solid ${p.accentColor}33`,textDecoration:"none",
-            fontFamily:"var(--font-code,monospace)",letterSpacing:"0.05em" }}>Demo →</a>
-        </div>
+      {/* ホバーオーバーレイ */}
+      <div className="glass-photo absolute inset-0 z-10 flex flex-col justify-end p-5
+        opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+        <span style={{ fontFamily: "var(--font-code,monospace)", fontSize: "0.6rem",
+          color: "#7aad89", letterSpacing: "0.12em", marginBottom: 8 }}>{w.category}</span>
+        <h3 style={{ fontFamily: "var(--font-display,Georgia,serif)",
+          fontSize: isLarge ? "1.3rem" : "1rem", fontWeight: 700,
+          color: "#faf9f6", marginBottom: 6, lineHeight: 1.3 }}>{w.title}</h3>
+        <p style={{ fontSize: "0.75rem", color: "rgba(250,249,246,0.82)", lineHeight: 1.65,
+          display: isLarge ? "block" : "-webkit-box",
+          WebkitLineClamp: isLarge ? undefined : 2,
+          WebkitBoxOrient: isLarge ? undefined : "vertical" as const,
+          overflow: "hidden" }}>{w.desc}</p>
       </div>
     </div>
   );
 }
 
 export default function Works() {
+  const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("All");
   const { ref, inView } = useInView<HTMLElement>();
+
+  const filtered = activeFilter === "All" ? works : works.filter((w) => w.category === activeFilter);
+
   return (
-    <section id="works" ref={ref} className="relative py-28 px-6" style={{ background:"#f3efe8" }}>
-      <div className="organic-glow" style={{ width:400,height:400,top:"10%",right:"5%",
-        background:"radial-gradient(ellipse,rgba(74,124,89,0.07) 0%,transparent 65%)" }} />
+    <section id="works" ref={ref} className="relative py-28 px-6" style={{ background: "#f3efe8" }}>
+      <div className="organic-glow" style={{ width: 400, height: 400, top: "10%", right: "5%",
+        background: "radial-gradient(ellipse,rgba(74,124,89,0.07) 0%,transparent 65%)" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <div className={`text-center mb-16 transition-all duration-700 ${inView?"opacity-100 translate-y-0":"opacity-0 translate-y-6"}`}>
+        {/* ヘッダー */}
+        <div className={`text-center mb-12 transition-all duration-700
+          ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <span className="section-label block mb-4">PROJECTS</span>
-          <h2 style={{ fontFamily:"var(--font-display,Georgia,serif)",
-            fontSize:"clamp(2rem,4vw,3rem)",fontWeight:700,color:"#2c2a26",marginBottom:"12px" }}>
-            制作<span style={{ color:"#4a7c59" }}>実績</span>
+          <h2 style={{ fontFamily: "var(--font-display,Georgia,serif)",
+            fontSize: "clamp(2rem,4vw,3rem)", fontWeight: 700, color: "#2c2a26", marginBottom: 12 }}>
+            制作<span style={{ color: "#4a7c59" }}>実績</span>
           </h2>
-          <div className="divider-gold mx-auto" style={{ marginTop:"16px" }} />
+          <div className="divider-gold mx-auto" style={{ marginTop: 16 }} />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-auto">
-          {projects.map((p, i) => (
-            <Card key={p.id} p={p} inView={inView} delay={`${0.12 + i * 0.12}s`} />
+        {/* フィルタータブ */}
+        <div className={`flex justify-center gap-3 mb-10 transition-all duration-700
+          ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          style={{ transitionDelay: "0.1s" }}>
+          {FILTERS.map((f) => (
+            <button key={f} onClick={() => setActiveFilter(f)}
+              style={{
+                padding: "7px 20px", borderRadius: 99, fontSize: "0.78rem",
+                fontFamily: "var(--font-code,monospace)", letterSpacing: "0.06em",
+                cursor: "pointer", transition: "all 0.25s ease", border: "1px solid",
+                background: activeFilter === f ? "#4a7c59" : "rgba(250,249,246,0.7)",
+                color: activeFilter === f ? "#faf9f6" : "#5c5752",
+                borderColor: activeFilter === f ? "#4a7c59" : "rgba(200,184,154,0.4)",
+              }}>
+              {f}
+            </button>
           ))}
         </div>
+
+        {/* Bentoグリッド */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+          {filtered.map((w, i) => (
+            <WorkCard key={w.id} w={w} inView={inView} delay={`${0.08 + i * 0.06}s`} />
+          ))}
+        </div>
+
+        <p style={{ textAlign: "center", marginTop: 20, fontSize: "0.72rem",
+          color: "#9b9490", fontFamily: "var(--font-code,monospace)", letterSpacing: "0.08em" }}>
+          {filtered.length} PROJECTS
+        </p>
       </div>
     </section>
   );
