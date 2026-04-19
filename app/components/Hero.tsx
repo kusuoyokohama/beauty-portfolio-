@@ -60,9 +60,9 @@ export default function Hero() {
       <div className="organic-glow" style={{ width:380,height:380,top:"30%",left:"25%",
         background:"radial-gradient(ellipse,rgba(200,184,154,0.1) 0%,transparent 65%)" }} />
 
-      {/* フローティング装飾アイコン */}
+      {/* フローティング装飾アイコン（スクリーンリーダーに読み上げさせない） */}
       {floatingIcons.map((item, i) => (
-        <div key={i} className="animate-float" style={{
+        <div key={i} aria-hidden="true" className="animate-float" style={{
           position: "absolute",
           top: item.top, left: item.left, right: item.right,
           fontSize: item.size, opacity: item.opacity,
