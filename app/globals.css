@@ -192,12 +192,7 @@ code, .font-mono {
 .animate-fade-in    { animation: fadeIn      0.8s var(--ease-out-quart) both; }
 .animate-float      { animation: softFloat   6s ease-in-out infinite; }
 
-.delay-100 { animation-delay: 0.10s; }
-.delay-200 { animation-delay: 0.20s; }
-.delay-300 { animation-delay: 0.32s; }
-.delay-400 { animation-delay: 0.44s; }
-.delay-500 { animation-delay: 0.56s; }
-.delay-600 { animation-delay: 0.68s; }
+/* delay-100〜delay-600 は全コンポーネントで未使用のため削除 */
 
 /* prefers-reduced-motion 対応 */
 @media (prefers-reduced-motion: reduce) {

@@ -1,10 +1,10 @@
 "use client";
+import type { CSSProperties } from "react";
 
-/* Hero: NanoBanana Pro kawaii × pastel アップグレード版
+/* Hero: kawaii × pastel デザイン
    hero-bg.webp が /public/ に存在すればそちらを使用、なければCSS背景にフォールバック */
 
 const EXP = "cubic-bezier(0.19,1,0.22,1)";
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const stats = [
   { value: "50+",  label: "プロジェクト実績" },
@@ -29,10 +29,10 @@ const floatingIcons = [
 ];
 
 function fadeUp(delay: string) {
-  return { animation: `fadeInUp 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+  return { animation: `fadeInUp 0.9s ${EXP} ${delay} both` } as CSSProperties;
 }
 function fadeRight(delay: string) {
-  return { animation: `fadeInRight 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+  return { animation: `fadeInRight 0.9s ${EXP} ${delay} both` } as CSSProperties;
 }
 
 export default function Hero() {
