@@ -17,8 +17,6 @@ const techStack = ["Next.js", "TypeScript", "Claude API", "TailwindCSS", "Vercel
 
 export default function About() {
   const { ref, inView } = useInView<HTMLElement>();
-  const profileImg = `${BASE}/about-profile.webp`;
-
   return (
     <section id="about" ref={ref} className="relative py-28 px-6 overflow-hidden" style={{ background:"#faf9f6" }}>
       {/* パステルグロー */}

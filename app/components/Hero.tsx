@@ -36,8 +36,6 @@ function fadeRight(delay: string) {
 }
 
 export default function Hero() {
-  const heroBg = `${BASE}/hero-bg.webp`;
-
   return (
     <section
       id="hero"

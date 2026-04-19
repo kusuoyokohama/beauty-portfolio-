@@ -15,6 +15,8 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    /* TODO: Resend / Formspree 等のAPIと連携してメール送信を実装する
+       現在はUIデモのみ（実際には送信されない） */
     setSent(true);
   };
 
@@ -57,10 +59,17 @@ export default function Contact() {
                 <div style={{ textAlign:"center",padding:"40px 0" }}>
                   <div style={{ fontSize:"2.5rem",marginBottom:"12px" }}>🌿</div>
                   <p style={{ color:"#7aad89",fontSize:"0.9rem",fontFamily:"var(--font-display,Georgia,serif)",
-                    fontWeight:600 }}>送信しました。ありがとうございます。</p>
+                    fontWeight:600 }}>ありがとうございます！</p>
                   <p style={{ color:"rgba(250,249,246,0.4)",fontSize:"0.78rem",marginTop:"6px" }}>
-                    2営業日以内にご返信いたします。
+                    メールアドレス宛に直接ご連絡ください。
                   </p>
+                  <a href="mailto:sixmnr1146@gmail.com"
+                    style={{ display:"inline-block",marginTop:16,padding:"8px 20px",borderRadius:8,
+                      background:"rgba(74,124,89,0.2)",border:"1px solid rgba(74,124,89,0.4)",
+                      color:"#7aad89",fontSize:"0.8rem",textDecoration:"none",
+                      fontFamily:"var(--font-code,monospace)" }}>
+                    sixmnr1146@gmail.com
+                  </a>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display:"flex",flexDirection:"column",gap:"16px" }}>

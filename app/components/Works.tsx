@@ -34,16 +34,17 @@ function WorkCard({ w, delay, inView }: {
   inView: boolean;
 }) {
   const isLarge = w.size === "large";
-  const isMedium = w.size === "medium";
-
-  const height = isLarge ? 420 : isMedium ? 220 : 180;
 
   return (
     <div
       className={`relative rounded-2xl overflow-hidden group transition-all duration-700
         ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
         ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      style={{ transitionDelay: delay, height }}
+      style={{
+        transitionDelay: delay,
+        /* アスペクト比で高さを自動計算（固定px廃止→レスポンシブ対応） */
+        aspectRatio: isLarge ? "16/9" : "4/3",
+      }}
     >
       {/* 実績画像 */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
