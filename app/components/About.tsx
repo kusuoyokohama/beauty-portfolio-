@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 /* About: NanoBanana Pro kawaii × pastel アップグレード版
@@ -17,6 +18,8 @@ const techStack = ["Next.js", "TypeScript", "Claude API", "TailwindCSS", "Vercel
 
 export default function About() {
   const { ref, inView } = useInView<HTMLElement>();
+  const [imgError, setImgError] = useState(false);
+
   return (
     <section id="about" ref={ref} className="relative py-28 px-6 overflow-hidden" style={{ background:"#faf9f6" }}>
       {/* パステルグロー */}
@@ -60,24 +63,22 @@ export default function About() {
               <div style={{ position:"relative",width:160,height:160,borderRadius:"50%",overflow:"hidden",
                 border:"3px solid rgba(255,255,255,0.9)",
                 boxShadow:"0 8px 32px rgba(196,126,181,0.25), 0 2px 8px rgba(0,0,0,0.08)" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80"
-                  alt="プロフィール"
-                  style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"top" }}
-                  onError={(e) => {
-                    // 画像未生成時はkawaii SVGアバターにフォールバック
-                    const target = e.currentTarget;
-                    target.style.display = "none";
-                    const parent = target.parentElement;
-                    if (parent && !parent.querySelector("svg")) {
-                      parent.style.background = "linear-gradient(135deg,#fdf0f7,#e8f4f0)";
-                      parent.insertAdjacentHTML("beforeend",
-                        `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem">🧑‍💻</div>`
-                      );
-                    }
-                  }}
-                />
+                {imgError ? (
+                  /* 画像読み込み失敗時: Reactのstateで管理（insertAdjacentHTML廃止）*/
+                  <div style={{ width:"100%",height:"100%",display:"flex",alignItems:"center",
+                    justifyContent:"center",fontSize:"4rem",
+                    background:"linear-gradient(135deg,#fdf0f7,#e8f4f0)" }}>
+                    🧑‍💻
+                  </div>
+                ) : (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80"
+                    alt="プロフィール"
+                    style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"top" }}
+                    onError={() => setImgError(true)}
+                  />
+                )}
               </div>
               {/* フローティング装飾 */}
               {["🌸","⭐","✨"].map((icon, i) => (

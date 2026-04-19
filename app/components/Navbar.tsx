@@ -60,7 +60,8 @@ export default function Navbar() {
         {/* モバイル：ハンバーガーボタン */}
         <button className="md:hidden flex flex-col justify-center items-center gap-1.5 w-8 h-8"
           onClick={() => setMenuOpen((o) => !o)}
-          aria-label="メニューを開く"
+          aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
+          aria-expanded={menuOpen}
           style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
           <span style={{ display: "block", width: 22, height: 1.5, background: "#2c2a26",
             borderRadius: 2, transition: "all 0.3s ease",

@@ -184,12 +184,7 @@ code, .font-mono {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-8px); }
 }
-@keyframes scanLine {
-  0%   { top: -2%; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { top: 102%; opacity: 0; }
-}
+/* @keyframes scanLine は未使用のため削除済み */
 
 .animate-fade-up    { animation: fadeInUp    1.0s var(--ease-out-expo) both; }
 .animate-fade-left  { animation: fadeInLeft  1.0s var(--ease-out-expo) both; }

@@ -130,7 +130,7 @@ export default function Contact() {
             {contacts.map(c => (
               <a key={c.label} href={c.href}
                 target={c.href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
+                rel={c.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
                 className="glass-deep card-hover flex items-center gap-5 p-6 rounded-2xl"
                 style={{ textDecoration:"none",borderRadius:"16px",
                   border:`1px solid ${c.accent}22`,transition:"all 0.35s var(--ease-out-expo)" }}
