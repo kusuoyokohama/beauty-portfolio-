@@ -5,8 +5,6 @@ import { useInView } from "../hooks/useInView";
 /* About: NanoBanana Pro kawaii × pastel アップグレード版
    about-profile.webp が /public/ に存在すれば自動表示 */
 
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-
 const highlights = [
   { icon:"🌿", label:"AI自動化",    desc:"Claude APIで\n業務効率化を実現", color:"#4a7c59", bg:"rgba(74,124,89,0.08)" },
   { icon:"💄", label:"美容×Tech",   desc:"業界特化の\nソリューション",     color:"#c47eb5", bg:"rgba(196,126,181,0.08)" },
@@ -80,9 +78,9 @@ export default function About() {
                   />
                 )}
               </div>
-              {/* フローティング装飾 */}
+              {/* フローティング装飾（スクリーンリーダーに読み上げさせない） */}
               {["🌸","⭐","✨"].map((icon, i) => (
-                <div key={i} style={{
+                <div key={i} aria-hidden="true" style={{
                   position:"absolute",
                   top: i === 0 ? "-8px" : i === 1 ? "20%" : "70%",
                   left: i === 0 ? "60%" : i === 1 ? "-10px" : "88%",

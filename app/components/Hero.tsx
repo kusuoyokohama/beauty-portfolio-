@@ -1,10 +1,10 @@
 "use client";
+import type { CSSProperties } from "react";
 
-/* Hero: NanoBanana Pro kawaii × pastel アップグレード版
+/* Hero: kawaii × pastel デザイン
    hero-bg.webp が /public/ に存在すればそちらを使用、なければCSS背景にフォールバック */
 
 const EXP = "cubic-bezier(0.19,1,0.22,1)";
-const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const stats = [
   { value: "50+",  label: "プロジェクト実績" },
@@ -29,10 +29,10 @@ const floatingIcons = [
 ];
 
 function fadeUp(delay: string) {
-  return { animation: `fadeInUp 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+  return { animation: `fadeInUp 0.9s ${EXP} ${delay} both` } as CSSProperties;
 }
 function fadeRight(delay: string) {
-  return { animation: `fadeInRight 0.9s ${EXP} ${delay} both` } as React.CSSProperties;
+  return { animation: `fadeInRight 0.9s ${EXP} ${delay} both` } as CSSProperties;
 }
 
 export default function Hero() {
@@ -60,9 +60,9 @@ export default function Hero() {
       <div className="organic-glow" style={{ width:380,height:380,top:"30%",left:"25%",
         background:"radial-gradient(ellipse,rgba(200,184,154,0.1) 0%,transparent 65%)" }} />
 
-      {/* フローティング装飾アイコン */}
+      {/* フローティング装飾アイコン（スクリーンリーダーに読み上げさせない） */}
       {floatingIcons.map((item, i) => (
-        <div key={i} className="animate-float" style={{
+        <div key={i} aria-hidden="true" className="animate-float" style={{
           position: "absolute",
           top: item.top, left: item.left, right: item.right,
           fontSize: item.size, opacity: item.opacity,

@@ -3,21 +3,27 @@ import { useState } from "react";
 import { useInView } from "../hooks/useInView";
 
 const contacts = [
-  { icon:"✉️", label:"Email",    value:"sixmnr1146@gmail.com", href:"mailto:sixmnr1146@gmail.com", accent:"#7aad89" },
-  { icon:"⌥",  label:"GitHub",   value:"github.com",           href:"https://github.com",           accent:"#4a7c59" },
-  { icon:"💼", label:"LinkedIn", value:"linkedin.com/in/",     href:"https://linkedin.com",          accent:"#c8b89a" },
+  { icon:"✉️", label:"Email",    value:"sixmnr1146@gmail.com",       href:"mailto:sixmnr1146@gmail.com",                      accent:"#7aad89" },
+  { icon:"⌥",  label:"GitHub",   value:"github.com/kusuoyokohama",   href:"https://github.com/kusuoyokohama",                 accent:"#4a7c59" },
+  { icon:"💼", label:"LinkedIn", value:"linkedin.com/in/kusuo1146",  href:"https://www.linkedin.com/in/kusuo1146",             accent:"#c8b89a" },
 ];
 
 export default function Contact() {
   const { ref, inView } = useInView<HTMLElement>();
   const [form, setForm] = useState({ name:"", email:"", message:"" });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    /* TODO: Resend / Formspree 等のAPIと連携してメール送信を実装する
-       現在はUIデモのみ（実際には送信されない） */
-    setSent(true);
+    setError(null);
+    try {
+      /* Formspree / Resend 連携時はここでawait fetch() */
+      await Promise.resolve();
+      setSent(true);
+    } catch {
+      setError("送信に失敗しました。時間をおいて再度お試しください。");
+    }
   };
 
   return (
@@ -55,13 +61,20 @@ export default function Contact() {
                 メッセージを送る
               </h3>
 
+              {/* デモ通知 */}
+              <div style={{ marginBottom:16,padding:"8px 12px",borderRadius:8,
+                background:"rgba(212,168,83,0.12)",border:"1px solid rgba(212,168,83,0.35)",
+                fontSize:"0.72rem",color:"rgba(250,249,246,0.6)",lineHeight:1.6 }}>
+                ⚠️ 現在このフォームはデモ版です。送信後に表示されるメールアドレスへ直接ご連絡ください。
+              </div>
+
               {sent ? (
                 <div style={{ textAlign:"center",padding:"40px 0" }}>
                   <div style={{ fontSize:"2.5rem",marginBottom:"12px" }}>🌿</div>
                   <p style={{ color:"#7aad89",fontSize:"0.9rem",fontFamily:"var(--font-display,Georgia,serif)",
                     fontWeight:600 }}>ありがとうございます！</p>
                   <p style={{ color:"rgba(250,249,246,0.4)",fontSize:"0.78rem",marginTop:"6px" }}>
-                    メールアドレス宛に直接ご連絡ください。
+                    下記メールアドレスへ直接ご連絡ください。
                   </p>
                   <a href="mailto:sixmnr1146@gmail.com"
                     style={{ display:"inline-block",marginTop:16,padding:"8px 20px",borderRadius:8,
@@ -74,20 +87,21 @@ export default function Contact() {
               ) : (
                 <form onSubmit={handleSubmit} style={{ display:"flex",flexDirection:"column",gap:"16px" }}>
                   {[
-                    { id:"name",    label:"お名前",         type:"text",     placeholder:"山田 花子" },
-                    { id:"email",   label:"メールアドレス", type:"email",    placeholder:"your@email.com" },
+                    { id:"contact-name",  label:"お名前",         type:"text",  placeholder:"山田 花子" },
+                    { id:"contact-email", label:"メールアドレス", type:"email", placeholder:"your@email.com" },
                   ].map(f => (
                     <div key={f.id}>
-                      <label style={{ display:"block",fontFamily:"var(--font-code,monospace)",
+                      <label htmlFor={f.id} style={{ display:"block",fontFamily:"var(--font-code,monospace)",
                         fontSize:"0.62rem",color:"#7aad89",letterSpacing:"0.15em",marginBottom:"6px" }}>
                         {f.label}
                       </label>
                       <input
+                        id={f.id}
                         type={f.type}
                         required
                         placeholder={f.placeholder}
-                        value={form[f.id as keyof typeof form]}
-                        onChange={e => setForm(p=>({...p,[f.id]:e.target.value}))}
+                        value={form[f.id === "contact-name" ? "name" : "email"]}
+                        onChange={e => setForm(p=>({...p,[f.id === "contact-name" ? "name" : "email"]:e.target.value}))}
                         style={{ width:"100%",background:"rgba(255,255,255,0.05)",
                           border:"1px solid rgba(200,184,154,0.2)",borderRadius:8,
                           padding:"10px 14px",color:"#faf9f6",fontSize:"0.88rem",outline:"none",
@@ -96,11 +110,12 @@ export default function Contact() {
                     </div>
                   ))}
                   <div>
-                    <label style={{ display:"block",fontFamily:"var(--font-code,monospace)",
+                    <label htmlFor="contact-message" style={{ display:"block",fontFamily:"var(--font-code,monospace)",
                       fontSize:"0.62rem",color:"#7aad89",letterSpacing:"0.15em",marginBottom:"6px" }}>
                       メッセージ
                     </label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={4}
                       placeholder="ご相談内容をお聞かせください"
@@ -112,6 +127,13 @@ export default function Contact() {
                         resize:"vertical",fontFamily:"var(--font-body,Inter,sans-serif)" }}
                     />
                   </div>
+                  {error && (
+                    <p role="alert" style={{ fontSize:"0.78rem",color:"#f87171",
+                      background:"rgba(248,113,113,0.1)",border:"1px solid rgba(248,113,113,0.3)",
+                      borderRadius:6,padding:"8px 12px" }}>
+                      {error}
+                    </p>
+                  )}
                   <button type="submit" className="btn-primary" style={{ width:"100%",
                     justifyContent:"center",marginTop:"4px" }}>
                     送信する →

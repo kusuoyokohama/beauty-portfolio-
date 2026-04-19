@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useInView } from "../hooks/useInView";
 
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -51,9 +51,11 @@ function WorkCard({ w, delay, inView }: {
       <img
         src={`${BASE}${w.image}`}
         alt={w.title}
+        loading="lazy"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%",
           objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.19,1,0.22,1)" }}
         className="group-hover:scale-105"
+        onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
       />
 
       {/* 結果バッジ（常時表示） */}
@@ -86,7 +88,10 @@ export default function Works() {
   const [activeFilter, setActiveFilter] = useState<typeof FILTERS[number]>("All");
   const { ref, inView } = useInView<HTMLElement>();
 
-  const filtered = activeFilter === "All" ? works : works.filter((w) => w.category === activeFilter);
+  const filtered = useMemo(
+    () => activeFilter === "All" ? works : works.filter((w) => w.category === activeFilter),
+    [activeFilter]
+  );
 
   return (
     <section id="works" ref={ref} className="relative py-28 px-6" style={{ background: "#f3efe8" }}>
@@ -111,6 +116,7 @@ export default function Works() {
           style={{ transitionDelay: "0.1s" }}>
           {FILTERS.map((f) => (
             <button key={f} onClick={() => setActiveFilter(f)}
+              aria-pressed={activeFilter === f}
               style={{
                 padding: "7px 20px", borderRadius: 99, fontSize: "0.78rem",
                 fontFamily: "var(--font-code,monospace)", letterSpacing: "0.06em",
