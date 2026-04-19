@@ -46,12 +46,12 @@ export default function Hero() {
         background: "linear-gradient(160deg,#fdf6f9 0%,#f0eef8 35%,#e8f4f0 70%,#faf9f6 100%)",
       }}
     >
-      {/* NanoBanana Pro 生成画像（存在すれば重ねる） */}
+      {/* Hero背景画像（Unsplash: ピンク×パープルネオン基板） */}
       <div style={{
         position: "absolute", inset: 0, zIndex: 0,
-        backgroundImage: `url(${heroBg})`,
-        backgroundSize: "cover", backgroundPosition: "center right",
-        opacity: 0.12,
+        backgroundImage: `url(https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=80)`,
+        backgroundSize: "cover", backgroundPosition: "center",
+        opacity: 0.13,
       }} />
 
       {/* kawaii パステルグロー */}

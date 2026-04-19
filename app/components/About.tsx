@@ -64,9 +64,9 @@ export default function About() {
                 boxShadow:"0 8px 32px rgba(196,126,181,0.25), 0 2px 8px rgba(0,0,0,0.08)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={profileImg}
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80"
                   alt="プロフィール"
-                  style={{ width:"100%",height:"100%",objectFit:"cover" }}
+                  style={{ width:"100%",height:"100%",objectFit:"cover",objectPosition:"top" }}
                   onError={(e) => {
                     // 画像未生成時はkawaii SVGアバターにフォールバック
                     const target = e.currentTarget;
