@@ -438,7 +438,7 @@ export default function App() {
                   : '設定',
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#f8f9fa',
+            backgroundColor: '#ffffff',
           },
           headerTitleStyle: {
             fontSize: 18,
@@ -479,7 +479,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#ffffff',
   },
   hero: {
     backgroundColor: '#6366f1',
@@ -505,6 +505,7 @@ const styles = StyleSheet.create({
   },
   section: {
     padding: 16,
+    backgroundColor: '#ffffff',
   },
   sectionTitle: {
     fontSize: 18,
