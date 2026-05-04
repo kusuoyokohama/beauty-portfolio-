@@ -1,0 +1,35 @@
+{
+  "name": "atelier-six-writer",
+  "displayName": "atelier six. Writer",
+  "version": "1.0.0",
+  "description": "美容室向けブログ・SNS原稿自動生成アプリ",
+  "author": "atelier six.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/atelier-six-writer"
+  },
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "com.ateliersix.writer",
+    "deploymentTarget": "13.0"
+  },
+  "android": {
+    "package": "com.ateliersix.writer",
+    "versionCode": 1,
+    "minSdkVersion": 21,
+    "targetSdkVersion": 34,
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.WRITE_EXTERNAL_STORAGE"
+    ]
+  },
+  "web": {
+    "favicon": "./assets/favicon.png",
+    "display": "standalone",
+    "scope": "/",
+    "startUrl": "/",
+    "orientation": "portrait-primary"
+  }
+}
