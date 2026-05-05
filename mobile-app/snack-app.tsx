@@ -132,22 +132,31 @@ const CreateScreen = () => {
         return (
           <View>
             <Text style={styles.stepTitle}>ステップ 1: お客様情報</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="年代（例：30代）"
+            <select
+              style={styles.select}
               value={formData.customerAge}
-              onChangeText={(text) =>
-                setFormData({ ...formData, customerAge: text })
+              onChange={(e) =>
+                setFormData({ ...formData, customerAge: e.target.value })
               }
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="来店頻度（例：月 1 回）"
+            >
+              <option value="">年代を選択</option>
+              <option value="20代">20代</option>
+              <option value="30代">30代</option>
+              <option value="40代">40代</option>
+              <option value="50代以上">50代以上</option>
+            </select>
+            <select
+              style={styles.select}
               value={formData.visitFrequency}
-              onChangeText={(text) =>
-                setFormData({ ...formData, visitFrequency: text })
+              onChange={(e) =>
+                setFormData({ ...formData, visitFrequency: e.target.value })
               }
-            />
+            >
+              <option value="">来店頻度を選択</option>
+              <option value="月1回">月1回</option>
+              <option value="月2回">月2回</option>
+              <option value="月3回以上">月3回以上</option>
+            </select>
           </View>
         );
       case 2:
@@ -606,13 +615,24 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   input: {
-    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#ddd',
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
     fontSize: 14,
+    backgroundColor: '#fff',
+  },
+  select: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    fontSize: 14,
+    width: '100%',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
   },
   textArea: {
     minHeight: 100,
