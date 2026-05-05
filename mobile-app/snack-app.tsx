@@ -126,6 +126,12 @@ const CreateScreen = () => {
     }
   };
 
+  const handlePrev = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
+
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -152,10 +158,11 @@ const CreateScreen = () => {
                 setFormData({ ...formData, visitFrequency: e.target.value })
               }
             >
-              <option value="">来店頻度を選択</option>
-              <option value="月1回">月1回</option>
-              <option value="月2回">月2回</option>
-              <option value="月3回以上">月3回以上</option>
+              <option value="">来店パターンを選択</option>
+              <option value="新規">新規</option>
+              <option value="再来">再来</option>
+              <option value="定期利用">定期利用</option>
+              <option value="失客再来">失客再来</option>
             </select>
           </View>
         );
@@ -279,14 +286,26 @@ const CreateScreen = () => {
 
         {renderStep()}
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleNext}
-        >
-          <Text style={styles.buttonText}>
-            {step === 7 ? '生成する' : '次へ'}
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          {step > 1 && (
+            <TouchableOpacity
+              style={[styles.button, styles.buttonSecondary]}
+              onPress={handlePrev}
+            >
+              <Text style={[styles.buttonText, styles.buttonTextSecondary]}>
+                前へ戻る
+              </Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleNext}
+          >
+            <Text style={styles.buttonText}>
+              {step === 7 ? '生成する' : '次へ'}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -638,17 +657,29 @@ const styles = StyleSheet.create({
     minHeight: 100,
     textAlignVertical: 'top',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginTop: 16,
+  },
   button: {
     backgroundColor: '#6366f1',
     padding: 14,
     borderRadius: 8,
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 0,
+    flex: 1,
+  },
+  buttonSecondary: {
+    backgroundColor: '#e5e7eb',
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
+  },
+  buttonTextSecondary: {
+    color: '#374151',
   },
   dangerButton: {
     backgroundColor: '#ef4444',
